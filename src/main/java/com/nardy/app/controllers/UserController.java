@@ -1,7 +1,7 @@
 package com.nardy.app.controllers;
 
-import com.nardy.app.persistence.User;
-import com.nardy.app.persistence.UserRepository;
+import com.nardy.app.persistence.user.Users;
+import com.nardy.app.persistence.user.UsersRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -13,19 +13,19 @@ import java.util.List;
 @Controller
 @RequestMapping("/createUser")
 public class UserController {
-        private final UserRepository userRepo;
+        private final UsersRepository userRepo;
 
         @Autowired
-    public UserController(UserRepository userRepo) {
+    public UserController(UsersRepository userRepo) {
         this.userRepo = userRepo;
     }
 
     @GetMapping
     public String showUserList(Model model) {
-        List<User> users = new ArrayList<>();
+        List<Users> users = new ArrayList<>();
         userRepo.findAll().forEach(users::add);
-        User.Role[] roles = User.Role.values();
-        for (User.Role role:roles){
+        Users.Role[] roles = Users.Role.values();
+        for (Users.Role role:roles){
         model.addAttribute(role.toString().toLowerCase(),)
     }
 }

@@ -1,15 +1,14 @@
-package com.nardy.app.persistence;
+package com.nardy.app.persistence.session;
 
+import com.nardy.app.persistence.AbstractEntity;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
-@EqualsAndHashCode(callSuper = true)
 @Data
-public class Piece extends AbstractEntity {
-    @NotNull
+public class Piece {
     private boolean isBlack;
     public boolean isWhite(){
         return !isBlack;

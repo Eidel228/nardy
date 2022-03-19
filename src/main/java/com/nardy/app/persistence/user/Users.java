@@ -1,4 +1,4 @@
-package com.nardy.app.persistence;
+package com.nardy.app.persistence.user;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -9,22 +9,23 @@ import java.sql.Date;
 
 @Data
 @AllArgsConstructor
-public class User {
+public class Users {
+
     @NotNull
-    private final long id;
-    @NotNull
-    private final Date createdAt;
+    @Size(min = 3,max = 32)
+    private final String login;
+
     @NotNull
     @Size(min=3,max = 32)
-    private final String name;
+    private final String password;
+
+    @NotNull
+    private final Date createdAt;
+
     @NotNull
     private double rating;
-    @NotNull
-    private Role role;
 
-    public enum Role{
-        USER,ADMIN;
-    }
+    private long session;
 
 }
 
