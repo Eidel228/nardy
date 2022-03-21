@@ -1,26 +1,30 @@
 create table if not exists Users (
 login varchar(32) not null,
 password varchar(32) not null,
-createdAt timestamp not null,
-rating bigint not null,
-gameSession bigint not null
+rating integer not null,
+createdAt timestamp not null
 );
 
-create table if not exists Game_Session(
-id identity,
+create table if not exists GameSession(
 playerOne varchar(32) not null,
 playerTwo varchar(32) not null,
-createdAt timestamp not null,
-holes int array[24]
+boardId bigint not null,
+createdAt timestamp not null
 );
 
-alter table Game_Session
-    add foreign key (playerOne) references Users(login);
-alter table Game_Session
-    add foreign key (playerTwo) references Users(login);
+create table if not exists Board(
+id identity,
+holes integer array[24] not null,
+isWhite binary array[24]
+);
 
-alter table Users
-    add foreign key (gameSession) references Game_Session(id);
+alter table GameSession
+    add foreign key (playerOne) references Users(login);
+alter table GameSession
+    add foreign key (playerTwo) references Users(login);
+alter table GameSession
+    add foreign key (boardId) references Board(id);
+
 
 
 

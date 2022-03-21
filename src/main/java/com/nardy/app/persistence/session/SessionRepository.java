@@ -1,9 +1,8 @@
 package com.nardy.app.persistence.session;
 
-import com.nardy.app.persistence.user.Users;
-
 public interface SessionRepository {
-    Iterable<Users> findAll();
-    Users findById(long id);
-    Users save(Users user);
+    Iterable<Session> findAll();
+    Session findByUserOne(String id);
+    Session findByUserTwo(String id);
+    Session save(Session session);
 }
