@@ -1,7 +1,6 @@
 package com.nardy.app.controllers;
 
-import com.nardy.app.entity.Users;
-import com.nardy.app.entity.repositories.RegistrationForm;
+import com.nardy.app.entity.RegistrationForm;
 import com.nardy.app.entity.repositories.UsersRepository;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;

@@ -1,6 +1,5 @@
-package com.nardy.app.entity.repositories;
+package com.nardy.app.entity;
 
-import com.nardy.app.entity.Users;
 import lombok.Data;
 import org.springframework.security.crypto.password.PasswordEncoder;
 

@@ -15,7 +15,7 @@ createdAt timestamp not null
 
 create table if not exists Board(
 id identity,
-boardId varchar(30) not null
+holes varchar(30) not null
 );
 
 alter table GameSession
