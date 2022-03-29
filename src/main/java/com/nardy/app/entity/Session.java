@@ -1,32 +1,30 @@
 package com.nardy.app.entity;
 
 import lombok.*;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.context.annotation.Bean;
 
 import javax.persistence.*;
 import javax.validation.constraints.Size;
 import java.io.Serializable;
 import java.util.Date;
 
+@Entity
 @Getter
 @Setter
 @ToString
 @RequiredArgsConstructor
 @NoArgsConstructor(access = AccessLevel.PRIVATE,force = true)
-public class Board implements Serializable {
+public class Session implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
-    private Board() {
+    public Session(User playerOne, User playerTwo) {
+        this.playerOne = playerOne;
+        this.playerTwo = playerTwo;
         this.holes = "aaaaaaaaaaaaaaazzzzzzzzzzzzzzz";
     }
 
-    public Board startingMatch(){
-        return new Board();
-    }
-
+    @Id
+    @GeneratedValue
     private long id;
 
     @OneToOne(targetEntity= User.class)
@@ -44,4 +42,23 @@ public class Board implements Serializable {
     void createdAt(){
         this.createdAt = new Date();
     }
+
+    @Getter
+    @Setter
+    @ToString
+    @RequiredArgsConstructor
+    @NoArgsConstructor(access = AccessLevel.PRIVATE,force = true)
+    public class Board implements Serializable {
+
+        private static final long serialVersionUID = 1L;
+
+        private Board() {
+            this.holes = "aaaaaaaaaaaaaaazzzzzzzzzzzzzzz";
+        }
+
+        public com.nardy.app.entity.Board startingMatch(){
+            return new com.nardy.app.entity.Board();
+        }
+
+
 }

@@ -1,7 +1,7 @@
 package com.nardy.app.controllers;
 
 import com.nardy.app.entity.RegistrationForm;
-import com.nardy.app.entity.repositories.UsersRepository;
+import com.nardy.app.entity.repositories.UserRepository;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -12,12 +12,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @RequestMapping("/register")
 public class RegistrationController {
 
-    private UsersRepository userRepo;
+    private UserRepository userRepo;
 
     private PasswordEncoder passwordEncoder;
 
     public RegistrationController(
-            UsersRepository userRepo, PasswordEncoder passwordEncoder){
+            UserRepository userRepo, PasswordEncoder passwordEncoder){
         this.userRepo = userRepo;
         this.passwordEncoder = passwordEncoder;
     }

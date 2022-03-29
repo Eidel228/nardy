@@ -1,20 +1,53 @@
 package com.nardy.app.controllers;
 
-import org.springframework.scheduling.annotation.Scheduled;
+import com.nardy.app.entity.Session;
+import com.nardy.app.entity.User;
+import com.nardy.app.entity.repositories.MatchRepository;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.support.SessionStatus;
-
-import java.security.Principal;
+import org.springframework.web.bind.annotation.*;
 
 @Controller
 @RequestMapping("/wait")
 public class WaitController {
 
+    private MatchRepository sessionRepo;
+
+    private BoardRepository boardRepo;
+
+    private User playerOne;
+
+    private User playerTwo;
+
+    long id;
+
+
+
+    @Autowired
+    public WaitController(MatchRepository sessionRepo, BoardRepository boardRepo ){
+        this.sessionRepo=sessionRepo;
+        this.boardRepo=boardRepo;
+    }
+
     @GetMapping
-    @Scheduled(initialDelay = 10000)
-    public String checkOpponent(){
-        return "/start";
+    public String joinGame(@AuthenticationPrincipal User user){
+        if(playerOne==null){
+            playerOne=user;
+            return "wait";
+        }
+        else {
+            playerTwo=user;
+            this.id = sessionRepo.save(new Session(playerOne, playerTwo)).getId();
+            return "redirect:/game/"+id;
+        }
+    }
+
+    @PostMapping
+    public String refresh(){
+        if(playerTwo==null){
+            return "wait";
+        }
+        else return "redirect:/game/"+id;
     }
 }
